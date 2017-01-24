@@ -1,0 +1,337 @@
+@mixin flex-grow($weight) {
+    -webkit-box-flex: $weight;
+    -moz-flex-grow: $weight;
+    -webkit-flex-grow: $weight;
+    flex-grow: $weight;
+}
+
+@mixin blur($blur) {
+    -webkit-filter: blur($blur);
+    -moz-filter: blur($blur);
+    -o-filter: blur($blur);
+    -ms-filter: blur($blur);
+    filter: blur($blur);
+    transition: transform $presto linear;
+    -moz-transition: transform $presto linear;
+    -webkit-transition: transform $presto linear;
+    -o-transition: transform $presto linear;
+    transition-delay: $presto;
+    -moz-transition-delay: $presto;
+    -webkit-transition-delay: $presto;
+    -o-transition-delay: $presto;
+}
+
+@mixin transition($trans) {
+    transition: $trans;
+    -moz-transition: $trans;
+    -webkit-transition: $trans;
+    -o-transition: $trans;
+}
+
+@mixin animation($anim) {
+    animation: $anim;
+    -webkit-animation: $anim;
+    -moz-animation: $anim;
+    -ms-animation: $anim;
+}
+
+@mixin fullsreen($z-index) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-index;
+    overflow: hidden;
+}
+
+@mixin transform($transform) {
+    transform: $transform;
+    -ms-transform: $transform;
+    -moz-transform: $transform;
+    -webkit-transform: $transform;
+    -o-transform: $transform;
+}
+
+.flex-box-vertical {
+    /*伸缩模型*/
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flexbox;
+    display: flex;
+    /*纵向显示*/
+    -webkit-box-direction: vertical;
+    -webkit-box-orient: vertical;
+    -moz-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    >header {
+        @include flex-grow(0);
+    }
+    >content {
+        @include flex-grow(1);
+    }
+    >footer {
+        @include flex-grow(0);
+    }
+}
+
+.flex-box-horizontal {
+    /*伸缩模型*/
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flexbox;
+    display: flex;
+    /*横向显示*/
+    -webkit-box-direction: horizontal;
+    -webkit-box-orient: horizontal;
+    -moz-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    /*纵向居中*/
+    -webkit-box-align: center;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shade-as-list {
+    @extend .shadow-cut;
+    @extend .line-around;
+    overflow: hidden;
+    > * {
+        @extend .shadow-inset;
+        @extend .line-bottom;
+        &:last-child {
+            border: none;
+        }
+    }
+}
+
+html {
+    font-size: 62.5%;
+}
+
+section {
+    width: 100%;
+    max-width: $width-max;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: $font-size-header;
+    color: $color-text-primary;
+    font-weight: 600;
+}
+
+h2 {
+    color: $color-text-secondary;
+    margin-top: $height-blank;
+    line-height: $height-regular - $height-blank;
+    padding-left: $padding-normal;
+}
+
+h3 {
+    height: $height-blank;
+}
+
+label {
+    text-align: center;
+    color: $color-text-light;
+    &[type=switch] {
+        i {
+            @extend .in-pop;
+            &:last-child {
+                color: $color-theme;
+            }
+        }
+        &[checked='true'] {
+            i:first-child {
+                display: none;
+            }
+            i:last-child {
+                display: inline-block;
+            }
+        }
+        &[checked='false'] {
+            i:first-child {
+                display: inline-block;
+            }
+            i:last-child {
+                display: none;
+            }
+        }
+    }
+}
+
+em {
+    @extend .ellipsis;
+    color: $color-text-primary;
+    &:only-child {
+        width: 100%;
+    }
+}
+
+pre {
+    @extend .ellipsis;
+    color: $color-text-light;
+    text-align: right;
+    &:only-child {
+        width: 100%;
+    }
+}
+
+button {
+    background-color: transparent;
+    color: $color-theme;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: $height-regular;
+    &:disabled {
+        color: #e0e0e0;
+    }
+    &:only-child {
+        width: 100%;
+    }
+    &:hover {
+        @extend .blink-wave;
+    }
+    &[type=image]:hover {
+        background-color: rgba(256, 256, 256, 0.7);
+    }
+    &[type=positive]:hover {
+        @extend .blink-reverse;
+    }
+    &[type=negtive] {
+        font-weight: 500;
+        color: $color-text-secondary;
+    }
+    &[type=negtive]:hover {
+        @extend .blink-wave;
+    }
+}
+
+clip {
+    @extend .shadow-cut;
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    overflow: hidden;
+    &:after {
+        content: '';
+        padding-top: 100%;
+        display: block;
+    }
+    img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+/*表格行*/
+
+li {
+    @extend .flex-box-horizontal;
+    >* {
+        @include flex-grow(0);
+        padding: 0 $padding-half;
+        height: $height-regular;
+        line-height: $height-regular;
+        &:last-child {
+            padding-right: $padding-normal;
+        }
+        &:first-child {
+            padding-left: $padding-normal;
+        }
+    }
+    input,
+    em,
+    h1 {
+        @include flex-grow(1);
+    }
+    pre {
+        @include flex-grow(0.5);
+    }
+}
+
+ul {
+    @extend .shadow-cut;
+    @extend .shade-as-list;
+    border-radius: $radius-m;
+    background-color: $color-front;
+}
+
+ol {
+    @extend .flex-box-horizontal;
+    flex-wrap: wrap;
+    > * {
+        @include flex-grow(0);
+        width: 25%;
+    }
+}
+
+block {
+    @extend .line-around;
+    @extend .shadow-inset;
+    display: block;
+    background-color: $color-front;
+    > * {
+        margin-bottom: $padding-narrow;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    &[type=card] {
+        @extend .shadow-cut;
+        margin: $padding-half;
+        padding: $padding-half;
+        border-radius: $radius-s;
+    }
+    &[type=table] {
+        padding: $padding-normal;
+    }
+    .fa {
+        font-size: $font-size-small;
+        vertical-align: 0;
+        margin: $padding-narrow;
+    }
+}
+
+@media (max-width: 767px) {
+    ul {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        background-color: white;
+        box-shadow: 0 0 1px white;
+    }
+    li {
+        background-color: white;
+    }
+    html {
+        font-size: 50%;
+    }
+    h2 {
+        height: 2.5rem;
+        line-height: 3rem;
+        padding-top: 0;
+    }
+    h3 {
+        height: 2.5rem;
+        &:first-child {
+            display: none;
+        }
+    }
+}
