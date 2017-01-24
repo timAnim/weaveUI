@@ -304,4 +304,4 @@ define(function() {
         Toast: Toast,
         Confirm: Confirm,
     };
-})
+});

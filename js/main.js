@@ -1,6 +1,6 @@
 require(['lan'], function(lan) {
     require(["weave", "Hammer"], function(wv, Hammer) {
-        require(['component'], function(component) {
+        require(['component', 'dtPicker'], function(coms, dt) {
 
             var show = function(id) {
                 var dom = wv.toHTML(wv.id(id).value);
@@ -14,10 +14,12 @@ require(['lan'], function(lan) {
                 var target = ev.target;
                 var tag = target.tagName;
                 if (tag == 'I') target = target.parentNode;
+                if (tag == 'IMG') target = target.parentNode.parentNode;
                 switch (tag) {
                     case 'EM':
                     case 'PRE':
                     case 'LABEL':
+                    case 'CLIP':
                         target = target.parentNode;
                         break;
                     case 'ARTICLE':
@@ -26,6 +28,7 @@ require(['lan'], function(lan) {
                         wv.log.pop();
                         break;
                 }
+
                 switch (target.id) {
                     case 'footer-switch':
                         var checked = (command.getAttribute('footer') == 'true') ? false : true;
@@ -33,17 +36,17 @@ require(['lan'], function(lan) {
                         target.setAttribute('checked', checked);
                         break;
                     case 'login-btn':
-                        component.Login();
+                        coms.Login();
                         break;
                     case 'form-btn':
                         show('form-tmp');
                         break;
                     case 'input-btn':
-                        new component.InputDialog({
+                        new coms.InputDialog({
                             title: '选择',
                             data: {
-                                placeholder:'输入文本',
-                                type:'text',
+                                placeholder: '输入文本',
+                                type: 'text',
                             },
                             onSubmit: function(res) {
                                 var pre = wv.tag('pre', target);
@@ -52,7 +55,7 @@ require(['lan'], function(lan) {
                         });
                         break;
                     case 'confirm-btn':
-                        new component.Confirm({
+                        new coms.Confirm({
                             title: '选择',
                             onSubmit: function(res) {
                                 var pre = wv.tag('pre', target);
@@ -61,7 +64,7 @@ require(['lan'], function(lan) {
                         });
                         break;
                     case 'toast-btn':
-                        component.Toast('Toast');
+                        coms.Toast('Toast');
                         break;
                     case 'menu-btn':
                         show('menu-tmp');
@@ -73,7 +76,7 @@ require(['lan'], function(lan) {
                         wv.log.pop();
                         break;
                     case 'check-btn':
-                        new component.CheckDialog({
+                        new coms.CheckDialog({
                             title: '选择',
                             data: checkDlgData,
                             onSubmit: function(res) {
@@ -83,7 +86,7 @@ require(['lan'], function(lan) {
                         });
                         break;
                     case 'radio-btn':
-                        new component.RadioDialog({
+                        new coms.RadioDialog({
                             title: '选择',
                             onCreate: function(dialog) {
                                 dialog.setData(radioDlgData);
@@ -93,6 +96,12 @@ require(['lan'], function(lan) {
                                 if (pre) pre.innerHTML = res.txtArr.join(',');
                             }
                         });
+                        break;
+                    case 'date-picker':
+                        dt.dtInitDatePicker(target);
+                        break;
+                    case 'time-picker':
+                        dt.dtInitTimePicker(target);
                         break;
                 }
             };

@@ -285,6 +285,7 @@ ol {
 block {
     @extend .line-around;
     @extend .shadow-inset;
+    cursor: pointer;
     display: block;
     background-color: $color-front;
     > * {
