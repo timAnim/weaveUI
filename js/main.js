@@ -1,112 +1,162 @@
-require(['lan'], function(lan) {
-    require(["weave", "Hammer"], function(wv, Hammer) {
-        require(['component', 'dtPicker'], function(coms, dt) {
-
-            var show = function(id) {
-                var dom = wv.toHTML(wv.id(id).value);
-                wv.append(dom, document.body);
-                wv.log.in(id.split('-tmp')[0]);
+var menu;
+require(['lan', "Hammer"], function(lan, Hammer) {
+    require(["base"], function(base) {
+        require(['iDialog', 'dtPicker'], function(iDialog, dt) {
+            base.log.onIn = function(ele, last) {
+                if (ele.tagName == 'MODAL') document.body.setAttribute('ul', false);
+                else last.setAttribute('pause', true);
             }
+            base.log.onPop = function(ele, last) {
+                if (ele.tagName == 'MODAL') document.body.setAttribute('ul', true);
+                else last.setAttribute('pause', false);
+            }
+            menu = new iDialog({
+                title: '选择',
+                type: 'menu',
+                data: menuData,
+                clean: false,
+                onSubmit: function(res) {}
+            });
+            var aside = new iDialog({
+                img: '/image/img01.jpg',
+                data: menuData,
+                type: 'aside',
+                clean: false,
+                onSubmit: function(res) {}
+            });
 
-            var command = wv.find('body');
+            var date = document.getElementsByName('date-picker')[0];
+            var dateP = new iDialog.DatePicker({
+                'ele': date,
+                clean: false,
+                minDate: '2016-01-01',
+                maxDate: '2017-01-01',
+            });
+
+            var time = document.getElementsByName('time-picker')[0];
+            var timeP = new dt({
+                'ele': time,
+                clean: false,
+            });
+
+            var modal = new iDialog.Modal({
+                template: 'modal-tmp',
+                clean: false,
+                tapHandler: function(ev) {
+                    var target = ev.target;
+                    var name = target.getAttribute('name');
+                    if (!name) return;
+                    switch (name) {
+                        case 'toggle-btn':
+                            var toggle = base.find('label', target);
+                            var flag = (toggle.getAttribute('checked') == 'true') ? false : true;
+                            toggle.setAttribute('checked', flag);
+                            break;
+                        case 'close-modal':
+                            base.log.pop();
+                            break;
+                    }
+                }
+            });
 
             var tapHandler = function(ev) {
                 var target = ev.target;
-                var tag = target.tagName;
-                if (tag == 'I') target = target.parentNode;
-                if (tag == 'IMG') target = target.parentNode.parentNode;
-                switch (tag) {
-                    case 'EM':
-                    case 'PRE':
-                    case 'LABEL':
-                    case 'CLIP':
-                        target = target.parentNode;
-                        break;
-                    case 'ARTICLE':
-                    case 'FORM':
-                        if (target.getAttribute('pause') != 'true') return;
-                        wv.log.pop();
-                        break;
-                }
-
-                switch (target.id) {
+                var name = target.getAttribute('name');
+                if (!name) return;
+                switch (name) {
                     case 'footer-switch':
+                        var command = base.find('body');
                         var checked = (command.getAttribute('footer') == 'true') ? false : true;
                         command.setAttribute('footer', checked);
                         target.setAttribute('checked', checked);
                         break;
                     case 'login-btn':
-                        coms.Login();
+                        var login = new iDialog({
+                            type: 'login',
+                            title: '登录',
+                            clean: false,
+                            onSubmit: function(res) {
+                                console.log(res);
+                            }
+                        });
+                        login.show();
                         break;
-                    case 'form-btn':
-                        show('form-tmp');
+                    case 'modal-btn':
+                        modal.show();
                         break;
                     case 'input-btn':
-                        new coms.InputDialog({
+                        var input = new iDialog({
                             title: '选择',
+                            type: 'input',
+                            clean: true,
                             data: {
                                 placeholder: '输入文本',
                                 type: 'text',
                             },
-                            onSubmit: function(res) {
-                                var pre = wv.tag('pre', target);
+                            onOut: function(res) {
+                                var pre = base.find('pre', target);
                                 if (pre) pre.innerHTML = res;
                             }
                         });
+                        input.show();
                         break;
                     case 'confirm-btn':
-                        new coms.Confirm({
+                        var confirm = new iDialog({
                             title: '选择',
-                            onSubmit: function(res) {
-                                var pre = wv.tag('pre', target);
+                            type: 'confirm',
+                            clean: true,
+                            onOut: function(res) {
+                                var pre = base.find('pre', target);
                                 if (pre) pre.innerHTML = res;
                             }
                         });
+                        confirm.show();
                         break;
                     case 'toast-btn':
-                        coms.Toast('Toast');
+                        base.toast('Toast');
                         break;
                     case 'menu-btn':
-                        show('menu-tmp');
+                        menu.show();
                         break;
                     case 'aside-btn':
-                        wv.log.in('aside');
-                        break;
-                    case 'close-form':
-                        wv.log.pop();
+                        aside.show();
                         break;
                     case 'check-btn':
-                        new coms.CheckDialog({
+                        var check = new iDialog({
                             title: '选择',
+                            type: 'check',
+                            clean: true,
                             data: checkDlgData,
-                            onSubmit: function(res) {
-                                var pre = wv.tag('pre', target);
+                            onOut: function(res) {
+                                var pre = base.find('pre', target);
                                 if (pre) pre.innerHTML = res.txtArr.join(',');
                             }
                         });
+                        check.show();
                         break;
                     case 'radio-btn':
-                        new coms.RadioDialog({
+                        var radio = new iDialog({
                             title: '选择',
-                            onCreate: function(dialog) {
-                                dialog.setData(radioDlgData);
-                            },
-                            onSubmit: function(res) {
-                                var pre = wv.tag('pre', target);
+                            type: 'radio',
+                            clean: true,
+                            data: radioDlgData,
+                            onOut: function(res) {
+                                var pre = base.find('pre', target);
                                 if (pre) pre.innerHTML = res.txtArr.join(',');
                             }
                         });
+                        radio.show();
                         break;
                     case 'date-picker':
-                        dt.dtInitDatePicker(target);
+                        dateP.show();
                         break;
                     case 'time-picker':
-                        dt.dtInitTimePicker(target);
+                        timeP.show();
                         break;
                 }
             };
-            wv.scroll(wv.find('content'));
-            wv.ontap(tapHandler);
+            base.scroll(base.find('content'));
+            base.ontap(tapHandler, base.find('main'));
         });
     });
 });

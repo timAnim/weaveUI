@@ -1,115 +1,92 @@
-@mixin animation($anim) {
-    animation: $anim;
-    -webkit-animation: $anim;
-    -moz-animation: $anim;
-    -ms-animation: $anim;
-}
-
 .in-rotate {
-    @include animation(inRotate $presto ease);
+    animation:inRotate $presto ease;
 }
 
 .in-top {
-    @include animation(inTop $vivo ease);
+    animation:inTop $vivo ease;
 }
 
 .in-bottom {
-    @include animation(inBottom $presto ease);
+    animation:inBottom $presto ease;
 }
 
 .in-pop {
-    @include animation(inPop $vivo ease);
+    animation:inPop $vivo ease;
 }
 
 .in-left {
-    @include animation(inLeft $presto ease-in);
+    animation:inLeft $presto ease-in;
 }
 
 .out-left {
-    @include animation(outLeft $presto ease-in);
+    animation:outLeft $presto ease-in;
 }
 
 .out-bottom {
-    @include animation(outBottom $presto ease-in);
+    animation:outBottom $presto ease-in;
 }
 
 .out-top {
-    @include animation(outTop $presto ease-in);
+    animation:outTop $presto ease-in;
 }
 
 .out-opacity {
-    @include animation(outOpacity $vivo ease);
+    animation:outOpacity $vivo ease;
 }
 
 .blink-theme {
     &:hover {
         cursor: pointer;
-        @include animation(blinkTheme $largo ease);
+        animation:blinkTheme $largo ease;
     }
 }
 
 .blink-alert {
     &:hover {
         cursor: pointer;
-        @include animation(blinkAlert $largo*2 ease);
+        animation:blinkAlert $largo*2 ease;
     }
 }
 
 .blink-wave {
     &:hover {
         cursor: pointer;
-        @include animation(blinkWave $largo/2 linear);
+        animation:blinkWave $largo/2 linear;
     }
 }
 
 .blink-reverse {
     &:hover {
         cursor: pointer;
-        @include animation(blinkReverse $largo*2 ease);
-    }
-}
-
-.pause-blur {
-    &[pause=true] {
-        @include blur(3px);
-        transform: scale(0.95);
-    }
-    &[pause=true]:after {
-        @include fullsreen(2);
-        height: 120%;
-        width:120%;
-        margin-top: -10%;
-        margin-left: -10%;
-        content: '';
-        background-color: darken(rgba($color-back, 0.2), 20%);
+        animation:blinkReverse $largo*2 ease;
     }
 }
 
 @keyframes blinkTheme {
     0% {
-        background-color: $color-front;
-        color: $color-text-primary;
+        background-color: $bg-color-front;
+        color: $color-primary;
     }
     50% {
         background-color: rgba($color-theme, 0.1);
     }
     100% {
-        background-color: $color-front;
+        background-color: $bg-color-front;
     }
 }
 
 @keyframes blinkAlert {
     0% {
         background-color: transparent;
-        color: $color-text-secondary;
+        color: $color-secondary;
     }
     50% {
-        background-color: $color-alert;
-        color: $color-text-reverse;
+        background-color: $bg-color-alert;
+        color: $color-reverse;
     }
     100% {
         background-color: transparent;
-        color: $color-text-secondary;
+        color: $color-secondary;
     }
 }
 
@@ -120,7 +97,7 @@
     }
     50% {
         background-color: $color-theme;
-        color: $color-text-reverse;
+        color: $color-reverse;
     }
     100% {
         background-color: transparent;

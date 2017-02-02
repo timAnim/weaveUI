@@ -4,108 +4,93 @@
 <head>
     <title>test</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
     <link rel="stylesheet" type="text/css" href="./scss/main.css">
-    <style type="text/css">
-    #footer-switch {
-        position: absolute;
-        height: 3.2rem;
-        width: 3.2rem;
-        left: 1.6rem;
-        bottom: 1.6rem;
-        transition: all 0.2s ease;
-        cursor: pointer;
-    }
-    
-    #footer-switch[checked=false] {
-        transform: rotate(90deg);
-    }
-    </style>
 </head>
 
 <body aside='false' header='true' footer='false'>
-    <article>
+    <main>
         <header>
             <section>
                 <li>
-                    <button id='aside-btn'><i class="fa fa-bars"></i></button>
+                    <button name='aside-btn'><i class="fa fa-bars"></i></button>
                     <h1>Header</h1>
-                    <button id="menu-btn"><i class="fa fa-chevron-down"></i></button>
-                    <button id='login-btn'><i class='fa fa-user'></i></button>
+                    <button name="menu-btn"><i class="fa fa-chevron-down"></i></button>
+                    <button name='login-btn'><i class='fa fa-user'></i></button>
                     <button><i class="fa fa-close"></i></button>
                 </li>
             </section>
         </header>
         <content>
             <section>
-                <h3></h3>
                 <ol>
                     <span>
-                        <block type='card' id='date-picker'>
+                        <dl name='date-picker'>
+                            <dt>
+                                <clip>
+                                    <img src="/image/dateDlg.png" alt="">
+                                </clip>
+                            </dt>
+                            <dd>
+                                <i class="fa fa-user"></i>This is a Date picker
+                            </dd>
+                            <dd>
+                                <pre><i class="fa fa-user"></i>user</pre>
+                            </dd>
+                        </dl>
+                    </span>
+                    <span>
+                        <dl name='time-picker'>
+                            <clip>
+                                <img src="/image/timeDlg.png" alt="">
+                            </clip>
+                            <em><i class="fa fa-user"></i>This is a time picker</em>
+                            <pre><i class="fa fa-user"></i>user</pre>
+                        </dl>
+                    </span>
+                    <span>
+                        <dl name='radio-btn'>
                             <clip>
                                 <img src="/image/img01.jpg" alt="">
                             </clip>
-                            <em><i class="fa fa-user"></i>This is a Date picker</em>
-                            <pre>user</pre>
-                        </block>
+                            <em><i class="fa fa-user"></i>This is a radio ul</em>
+                            <pre><i class="fa fa-user"></i>user</pre>
+                        </dl>
                     </span>
                     <span>
-                        <block type='card' id='time-picker'>
+                        <dl>
                             <clip>
                                 <img src="/image/img01.jpg" alt="">
                             </clip>
                             <em><i class="fa fa-user"></i>This is a li</em>
                             <pre><i class="fa fa-user"></i>user</pre>
-                        </block>
-                    </span>
-                    <span>
-                        <block type='card'>
-                            <clip>
-                                <img src="/image/img01.jpg" alt="">
-                            </clip>
-                            <em><i class="fa fa-user"></i>This is a li</em>
-                            <pre><i class="fa fa-user"></i>user</pre>
-                        </block>
-                    </span>
-                    <span>
-                        <block type='card'>
-                            <clip>
-                                <img src="/image/img01.jpg" alt="">
-                            </clip>
-                            <em><i class="fa fa-user"></i>This is a li</em>
-                            <pre><i class="fa fa-user"></i>user</pre>
-                        </block>
+                        </dl>
                     </span>
                 </ol>
                 <h2>This is a list</h2>
                 <ul>
-                    <li>
-                        <label>Mobile</label>
-                        <input type="text" value='12345' name="">
-                        <button name='clear'><i class='fa fa-times-circle'></i></button>
-                    </li>
-                    <li id='form-btn' class='blink-theme'>
-                        <em>This is a form btn</em>
+                    <li name='modal-btn' class='blink-theme'>
+                        <em>This is a modal btn</em>
                         <label><i class="fa fa-angle-right"></i></label>
                     </li>
-                    <li id='input-btn' class='blink-theme'>
+                    <li name='input-btn' class='blink-theme'>
                         <em>This is a input btn</em>
                         <pre>Input res</pre>
                         <label><i class="fa fa-angle-right"></i></label>
                     </li>
-                    <li id='confirm-btn' class='blink-theme'>
+                    <li name='confirm-btn' class='blink-theme'>
                         <em>This is a confirm btn</em>
                         <pre></pre>
                         <label><i class="fa fa-angle-right"></i></label>
                     </li>
-                    <li id='toast-btn' class='blink-theme'>
+                    <li name='toast-btn' class='blink-theme'>
                         <em>This is a toast btn</em>
                         <label><i class="fa fa-angle-right"></i></label>
                     </li>
                 </ul>
-                <h3></h3>
             </section>
         </content>
-        <button checked="false" id='footer-switch'>
+        <button id='footer-switch' checked="false" name='footer-switch'>
             <i class="fa fa-angle-right"></i>
         </button>
         <footer>
@@ -113,89 +98,94 @@
                 <li><pre>footer</pre></li>
             </section>
         </footer>
-    </article>
-    <aside id='aside' out='out-left'>
-        <div>
-            <clip><img src="/image/img01.jpg" alt=""></clip>
-        </div>
+    </main>
+    <textarea id='modal-tmp'>
+        <header>
+            <section>
+                <li>
+                    <button name='close-modal'><i class="fa fa-chevron-down"></i></button>
+                    <h1>表单</h1>
+                    <button><i class="fa fa-save"></i></button>
+                </li>
+            </section>
+        </header>
         <content>
-            <li>
-                <label><i class='fa fa-user'></i></label><em>li</em>
-            </li>
-            <li>
-                <label><i class='fa fa-user'></i></label><em>li</em>
-            </li>
-            <li>
-                <label><i class='fa fa-user'></i></label><em>li</em>
-            </li>
-            <li>
-                <label><i class='fa fa-user'></i></label><em>li</em>
-            </li>
-        </content>
-    </aside>
-    <textarea id='form-tmp'>
-        <form action="" id='form' out='out-bottom'>
-            <header>
-                <section>
+            <section>
+                <ul>
                     <li>
-                        <button id='close-form'><i class="fa fa-chevron-down"></i></button>
-                        <h1>表单</h1>
-                        <button><i class="fa fa-save"></i></button>
+                        <label>Mobile</label>
+                        <input type="text" value='12345' name="">
+                        <button name='clear'><i class='fa fa-times-circle'></i></button>
                     </li>
-                </section>
-            </header>
-            <content>
-                <h3></h3>
-                <section>
-                    <ul>
-                        <li id='check-btn' class='blink-theme'>
-                            <em>this is a <i class="fa fa-square-o"></i> btn</em>
-                            <pre>check pre</pre>
-                            <label><i class="fa fa-angle-right"></i></label>
-                        </li>
-                        <li id='radio-btn' class='blink-theme'>
-                            <em>This is a <i class="fa fa-circle-o"></i> btn</em>
-                            <pre>radio pre</pre>
-                            <label><i class="fa fa-angle-right"></i></label>
-                        </li>
-                        <li id='toggle-btn' class='blink-theme' name='toggle'>
-                            <em>This is a toggle btn</em>
-                            <label type='switch' checked='false'>
-                                <i class="fa fa-toggle-off"></i>
-                                <i class="fa fa-toggle-on"></i>
-                            </label>
-                        </li>
-                    </ul>
-                </section>
-            </content>
-        </form>
+                </ul>
+                <ul>
+                    <li name='check-btn' class='blink-theme'>
+                        <em>this is a <i class="fa fa-square-o"></i> btn</em>
+                        <pre>check pre</pre>
+                        <label><i class="fa fa-angle-right"></i></label>
+                    </li>
+                    <li name='radio-btn' class='blink-theme'>
+                        <em>This is a <i class="fa fa-circle-o"></i> btn</em>
+                        <pre>radio pre</pre>
+                        <label><i class="fa fa-angle-right"></i></label>
+                    </li>
+                    <li name='toggle-btn' class='blink-theme' name='toggle'>
+                        <em>This is a toggle btn</em>
+                        <label type='switch' checked='false'>
+                            <i class="fa fa-toggle-off"></i>
+                            <i class="fa fa-toggle-on"></i>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+        </content>
     </textarea>
-    <textarea id='menu-tmp'>
-        <menu id='menu' out='out-top'>
-            <ul>
-                <header>
-                    <label><i class="fa fa-user"></i></label>
-                    <h1>menu</h1>
-                </header>
-                <li><em>menu</em></li>
-                <li><em>menu</em></li>
-                <li><em>menu</em></li>
-            </ul>
-        </menu>
-    </textarea>
-    <input id='userInit' type="hidden" value='{}' />
 </body>
 <script data-main="js/main" src="js/require.js"></script>
 <script>
-    var checkDlgData=[
-        {"id":"check1","value":"option1","secondary":"intro"},
-        {"id":"check2","value":"option2","secondary":"intro"},
-        {"id":"check3","value":"option3","secondary":"intro"}
-    ];
-    var radioDlgData=[
-        {"id":"radio1","value":"option1","secondary":"intro"},
-        {"id":"radio2","value":"option2","secondary":"intro"},
-        {"id":"radio3","value":"option3","secondary":"intro"}
-    ];
+var checkDlgData = [{
+    "id": "check1",
+    "value": "option1",
+    "secondary": "intro"
+}, {
+    "id": "check2",
+    "value": "option2",
+    "secondary": "intro"
+}, {
+    "id": "check3",
+    "value": "option3",
+    "secondary": "intro"
+}];
+var radioDlgData = [{
+    "id": "radio1",
+    "value": "option1",
+    "secondary": "intro",
+    "checked": 'true'
+}, {
+    "id": "radio2",
+    "value": "option2",
+    "secondary": "intro"
+}, {
+    "id": "radio3",
+    "value": "option3",
+    "secondary": "intro"
+}];
+var menuData = [{
+    "id": "radio1",
+    "label": "fa fa-user",
+    "value": "option1",
+    "secondary": "intro"
+}, {
+    "id": "radio2",
+    "label": "fa fa-user",
+    "value": "option2",
+    "secondary": "intro"
+}, {
+    "id": "radio3",
+    "label": "fa fa-user",
+    "value": "option3",
+    "secondary": "intro"
+}];
 </script>
+
 </html>
